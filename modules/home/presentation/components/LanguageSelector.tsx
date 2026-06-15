@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
-import { useLanguage } from "@/modules/home/presentation/hooks/useLanguage";
+// import { useLanguage } from "@/modules/home/presentation/hooks/useLanguage";
+import { useLanguage } from "@/modules/home/presentation/context/LanguageContext";
 
 export function LanguageSelector() {
   const [isOpen, setIsOpen] = useState(false);

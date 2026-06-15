@@ -16,37 +16,44 @@ import { MdAutoAwesome } from "react-icons/md";
 import { SearchBar } from "@/modules/home/presentation/components/SearchBar";
 import { PlanButton } from "@/modules/home/presentation/components/PlanButton";
 import { LanguageSelector } from "@/modules/home/presentation/components/LanguageSelector";
+import { useLanguage } from "@/modules/home/presentation/context/LanguageContext";
 
 const navItems = [
   {
-    label: "Home",
+    labelKey: "home",
     icon: <FiGrid />,
     active: true,
   },
   {
-    label: "Images",
+    labelKey: "images",
     icon: <FiImage />,
   },
   {
-    label: "Videos",
+    labelKey: "videos",
     icon: <FiVideo />,
   },
   {
-    label: "Audio",
+    labelKey: "audio",
     icon: <FiHeadphones />,
   },
   {
-    label: "Writer",
+    labelKey: "writer",
     icon: <FiEdit3 />,
   },
-];
+] as const;
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t, selectedLanguage } = useLanguage();
+
+  const isArabic = selectedLanguage.code === "ar";
 
   return (
     <header className="fixed left-0 top-9 z-40 w-full bg-black">
-      <nav className="flex h-20 items-center justify-between gap-3 px-4 md:px-10">
+      <nav
+        dir={isArabic ? "rtl" : "ltr"}
+        className="flex h-20 items-center justify-between gap-3 px-4 md:px-10"
+      >
         <div className="flex items-center gap-4 lg:gap-8">
           <div lang="ar" className="text-4xl font-black text-[#0A84FF]">
             ع
@@ -55,7 +62,7 @@ export function Navbar() {
           <div className="hidden items-center gap-7 xl:flex">
             {navItems.map((item) => (
               <button
-                key={item.label}
+                key={item.labelKey}
                 type="button"
                 className={`flex items-center gap-2 text-base font-bold transition ${
                   item.active
@@ -64,7 +71,7 @@ export function Navbar() {
                 }`}
               >
                 <span className="text-2xl">{item.icon}</span>
-                {item.label}
+                {t.nav[item.labelKey]}
               </button>
             ))}
 
@@ -75,7 +82,7 @@ export function Navbar() {
               <span lang="ar" className="text-3xl">
                 ع
               </span>
-              Araby GPT
+              {t.nav.arabyGpt}
             </button>
 
             <button
@@ -83,9 +90,9 @@ export function Navbar() {
               className="flex items-center gap-2 text-base font-bold text-zinc-400 transition hover:text-white"
             >
               <MdAutoAwesome className="text-2xl" />
-              Apps
+              {t.nav.apps}
               <span className="rounded-md bg-[#2065D1] px-2 py-1 text-xs font-bold text-white">
-                New
+                {t.nav.new}
               </span>
             </button>
           </div>
@@ -97,15 +104,8 @@ export function Navbar() {
           </div>
 
           <PlanButton />
-          
+
           <LanguageSelector />
-          
-          {/* <button
-            type="button"
-            className="hidden rounded bg-green-600 px-3 py-2 text-xs font-bold text-white sm:block"
-          >
-            🇸🇦
-          </button> */}
 
           <button
             type="button"
@@ -139,7 +139,12 @@ export function Navbar() {
 
       {isMenuOpen && (
         <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm xl:hidden">
-          <aside className="ml-auto h-full w-[280px] bg-zinc-950 p-5 shadow-2xl">
+          <aside
+            dir={isArabic ? "rtl" : "ltr"}
+            className={`h-full w-[280px] bg-zinc-950 p-5 shadow-2xl ${
+              isArabic ? "mr-auto" : "ml-auto"
+            }`}
+          >
             <div className="mb-8 flex items-center justify-between">
               <div className="font-heading text-xl font-bold text-white">
                 Menu
@@ -158,7 +163,7 @@ export function Navbar() {
             <div className="flex flex-col gap-3">
               {navItems.map((item) => (
                 <button
-                  key={item.label}
+                  key={item.labelKey}
                   type="button"
                   onClick={() => setIsMenuOpen(false)}
                   className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-base font-bold transition ${
@@ -168,7 +173,7 @@ export function Navbar() {
                   }`}
                 >
                   <span className="text-2xl">{item.icon}</span>
-                  {item.label}
+                  {t.nav[item.labelKey]}
                 </button>
               ))}
 
@@ -179,7 +184,7 @@ export function Navbar() {
                 <span lang="ar" className="text-3xl">
                   ع
                 </span>
-                Araby GPT
+                {t.nav.arabyGpt}
               </button>
 
               <button
@@ -187,9 +192,9 @@ export function Navbar() {
                 className="flex items-center gap-3 rounded-2xl px-4 py-3 text-base font-bold text-zinc-400 hover:bg-zinc-900 hover:text-white"
               >
                 <MdAutoAwesome className="text-2xl" />
-                Apps
+                {t.nav.apps}
                 <span className="rounded-md bg-[#2065D1] px-2 py-1 text-xs font-bold text-white">
-                  New
+                  {t.nav.new}
                 </span>
               </button>
             </div>

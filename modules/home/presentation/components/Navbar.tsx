@@ -17,6 +17,7 @@ import { SearchBar } from "@/modules/home/presentation/components/SearchBar";
 import { PlanButton } from "@/modules/home/presentation/components/PlanButton";
 import { LanguageSelector } from "@/modules/home/presentation/components/LanguageSelector";
 import { useLanguage } from "@/modules/home/presentation/context/LanguageContext";
+import { AuthModal } from "@/modules/home/presentation/components/AuthModal";
 
 const navItems = [
   {
@@ -44,12 +45,15 @@ const navItems = [
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const { t, selectedLanguage } = useLanguage();
 
   const isArabic = selectedLanguage.code === "ar";
 
   return (
     <header className="fixed left-0 top-9 z-40 w-full bg-black">
+      <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
+        
       <nav
         dir={isArabic ? "rtl" : "ltr"}
         className="flex h-20 items-center justify-between gap-3 px-4 md:px-10"
@@ -65,9 +69,7 @@ export function Navbar() {
                 key={item.labelKey}
                 type="button"
                 className={`flex items-center gap-2 text-base font-bold transition ${
-                  item.active
-                    ? "text-white"
-                    : "text-zinc-500 hover:text-white"
+                  item.active ? "text-white" : "text-zinc-500 hover:text-white"
                 }`}
               >
                 <span className="text-2xl">{item.icon}</span>
@@ -118,6 +120,7 @@ export function Navbar() {
           <button
             type="button"
             aria-label="Profile"
+            onClick={() => setIsAuthOpen(true)}
             className="flex items-center gap-2 text-zinc-400 transition hover:text-white"
           >
             <span className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-600 text-2xl text-black md:h-11 md:w-11">

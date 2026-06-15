@@ -26,3 +26,147 @@ h3,
 .arabic {
   font-family: var(--font-arabic), sans-serif;
 }
+
+/* Search Bar */
+.search-word-container {
+  position: relative;
+  height: 24px;
+  min-width: 90px;
+  overflow: hidden;
+}
+
+.search-word {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #ffffff;
+  font-weight: 700;
+  opacity: 0;
+  transform: translateY(100%);
+  animation: searchWordSlide 8s infinite;
+}
+
+.search-word:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.search-word:nth-child(2) {
+  animation-delay: 2s;
+}
+
+.search-word:nth-child(3) {
+  animation-delay: 4s;
+}
+
+.search-word:nth-child(4) {
+  animation-delay: 6s;
+}
+
+@keyframes searchWordSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  8%,
+  22% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  30%,
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+.plan-button {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid transparent;
+  background-image:
+    linear-gradient(#000, #000),
+    linear-gradient(90deg, #fb923c, #ffffff, #fb923c, #2065d1, #fb923c);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  background-size: 100% 100%, 300% 100%;
+  animation: planBorderMove 3s linear infinite;
+  box-shadow: 0 0 18px rgba(251, 146, 60, 0.25);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.plan-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 26px rgba(251, 146, 60, 0.45);
+}
+
+.plan-word-container {
+  position: relative;
+  display: inline-block;
+  height: 20px;
+  width: 78px;
+  overflow: hidden;
+}
+
+.plan-word {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(100%);
+  animation: planWordSlide 8s infinite;
+}
+
+.plan-word:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.plan-word:nth-child(2) {
+  animation-delay: 2s;
+}
+
+.plan-word:nth-child(3) {
+  animation-delay: 4s;
+}
+
+.plan-word:nth-child(4) {
+  animation-delay: 6s;
+}
+
+@keyframes planBorderMove {
+  0% {
+    background-position:
+      0 0,
+      0% 50%;
+  }
+
+  100% {
+    background-position:
+      0 0,
+      300% 50%;
+  }
+}
+
+@keyframes planWordSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  8%,
+  22% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  30%,
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}

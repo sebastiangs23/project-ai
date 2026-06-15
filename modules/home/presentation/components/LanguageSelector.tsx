@@ -12,7 +12,7 @@ export function LanguageSelector() {
   const SelectedFlag = selectedLanguage.FlagIcon;
 
   return (
-    <div className="relative hidden sm:block">
+    <div className="relative hidden shrink-0 xl:block">
       <button
         type="button"
         onClick={() => setIsOpen((current) => !current)}

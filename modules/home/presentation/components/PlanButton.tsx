@@ -14,7 +14,7 @@ export function PlanButton() {
   return (
     <button
       type="button"
-      className="plan-button md:w-[250px] hidden items-center gap-2 whitespace-nowrap rounded-xl px-5 py-2.5 text-sm font-extrabold sm:flex"
+      className="plan-button hidden shrink-0 items-center gap-2 whitespace-nowrap rounded-xl px-4 py-2 text-xs font-extrabold xl:flex"
     >
       <span className="plan-word-container">
         {words.map((word) => (

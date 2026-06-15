@@ -1,0 +1,59 @@
+import { HomeCardEntity } from "../../domain/entities/home-card.entity";
+import { FiImage, FiVideo, FiHeadphones, FiArrowRight } from "react-icons/fi";
+
+interface ToolCardProps {
+  card: HomeCardEntity;
+}
+
+const iconByType = {
+  image: <FiImage />,
+  video: <FiVideo />,
+  audio: <FiHeadphones />,
+};
+
+export function ToolCard({ card }: ToolCardProps) {
+  return (
+    <article className="group relative h-[320px] overflow-hidden rounded-[28px] border border-zinc-900 bg-zinc-950 md:h-[375px]">
+      <video
+        className="absolute inset-0 h-full w-full object-cover opacity-80 transition duration-500 group-hover:scale-105"
+        src={card.videoUrl}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+      />
+
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent" />
+
+      <div className="absolute left-5 top-5 flex h-12 w-12 items-center justify-center rounded-full border border-white/60 bg-white/20 text-2xl text-white backdrop-blur-sm">
+        {iconByType[card.type]}
+      </div>
+
+      {card.type === "image" && (
+        <div className="absolute left-[-36px] top-[110px] rotate-[-18deg] rounded-md border border-[#2065D1] bg-black px-3 py-1 text-xs font-black uppercase tracking-widest text-[#4BA3FF]">
+          Beta
+        </div>
+      )}
+
+      <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+        <h3 className="text-xl font-extrabold text-white">{card.title}</h3>
+        <p className="mt-1 max-w-[420px] text-sm font-medium text-white/90 md:text-base">
+          {card.description}
+        </p>
+
+        <div className="mt-8 flex items-center justify-between">
+          <span className="h-1 w-7 rounded-full bg-[#2065D1]" />
+
+          <button
+            type="button"
+            className="flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-800 px-5 py-3 text-sm font-extrabold text-white shadow-lg transition hover:bg-white hover:text-black"
+          >
+            {card.buttonLabel}
+            <FiArrowRight className="text-xl" />
+          </button>
+        </div>
+      </div>
+    </article>
+  );
+}

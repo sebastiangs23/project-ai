@@ -28,18 +28,22 @@ const navItems = [
   {
     labelKey: "images",
     icon: <FiImage />,
+    active: false,
   },
   {
     labelKey: "videos",
     icon: <FiVideo />,
+    active: false,
   },
   {
     labelKey: "audio",
     icon: <FiHeadphones />,
+    active: false,
   },
   {
     labelKey: "writer",
     icon: <FiEdit3 />,
+    active: false,
   },
 ] as const;
 
